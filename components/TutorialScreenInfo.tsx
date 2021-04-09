@@ -41,9 +41,9 @@ export default function TutorialScreenInfo({ path }: { path: string }) {
 function OpenTextFile() {
     DocumentPicker.getDocumentAsync({
       type: 'text/plain'
-    }).then(( result ) => {
+    }).then(( result: { uri: any; } ) => {
       //console.log(result.uri);
-      FileSystem.readAsStringAsync(result.uri).then((fileContents) => {
+      FileSystem.readAsStringAsync(result.uri).then((fileContents: string) => {
         InitParse(fileContents);
     });
   });
