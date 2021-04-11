@@ -5,13 +5,14 @@ import * as FileSystem from 'expo-file-system';
 import * as DocumentPicker from 'expo-document-picker';
 import InitParse from '../components/chatdata/InitParse';
 const WhatsappParser = require('whatsapp-chat-parser');
-
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+// @ts-ignore
 import tutorialImage1 from '../assets/images/tutorial_1.jpg';
+import navigation from '../navigation';
 
-export default function TutorialScreenInfo({ path }: { path: string }) {
+export default function TutorialScreenInfo() {
   return (
     <View>
       <View style={styles.getStartedContainer}>
@@ -41,10 +42,10 @@ export default function TutorialScreenInfo({ path }: { path: string }) {
 function OpenTextFile() {
     DocumentPicker.getDocumentAsync({
       type: 'text/plain'
-    }).then(( result: { uri: any; } ) => {
-      //console.log(result.uri);
+    }).then(( result ) => {
       FileSystem.readAsStringAsync(result.uri).then((fileContents: string) => {
         InitParse(fileContents);
+        navigation.navigate("GraphOverviewScreen");
     });
   });
 }
